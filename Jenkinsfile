@@ -14,12 +14,5 @@ pipeline {
                 }
             }
         }
-        stage ('Build web'){
-            steps {
-                script {
-                    mvn clean package -DskipTests=true -Dproject.versionNumber=$VERSION_NUMBER
-                }
-            }
-        }
     }
 }
