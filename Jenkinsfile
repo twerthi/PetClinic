@@ -23,7 +23,7 @@ pipeline {
 
         stage('Push to Nexus') {
             steps {
-                bat "
+                bat """
                     mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupID='OTPP'
                     -Dversion=${VERSION_NUMBER}
                     -Dfile=target/petclinic.web.${VERSION_NUMBER}.war
@@ -31,7 +31,7 @@ pipeline {
                     -DrepositoryId=nexus-maven
                     -DpomFile=pom.xml
                     -DartifactId='PetClinic.Web'
-                "
+                """
             }
         }
     }
