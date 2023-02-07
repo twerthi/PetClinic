@@ -17,7 +17,7 @@ pipeline {
 
         stage('Build') { 
             steps {
-                bat 'mvn -B -DskipTests clean package' 
+                bat "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}" 
             }
         }
     }
