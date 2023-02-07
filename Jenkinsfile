@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
         jdk 'JDK 12'
-        maven 'Maven 3.6.2'
     }
     stages {
         stage ('Set version') {
@@ -16,7 +15,11 @@ pipeline {
             }
         }
         stage ('Build web'){
-
+            steps {
+                script {
+                    mvn clean package -DskipTests=true -Dproject.versionNumber=$VERSION_NUMBER
+                }
+            }
         }
     }
 }
