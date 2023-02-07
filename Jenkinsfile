@@ -33,7 +33,7 @@ pipeline {
             steps {
                 octopusPushBuildInformation \
                     toolId: 'Default', \
-                    serverId: 'https://shawnsesna.octopusdemos.app', \
+                    serverId: 'Octopus Deploy', \
                     spaceId: 'Spaces-1', \
                     commentParser: 'GitHub', \
                     overwriteMode: 'FailIfExists', \
