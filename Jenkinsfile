@@ -42,7 +42,7 @@ pipeline {
                     verboseLogging: false, \
                     additionalArgs: '--debug', \
                     gitUrl: 'https://github.com/twerthi/PetClinic', \
-                    gitBranch: '${GIT_BRANCH}' \
+                    gitBranch: '${GIT_BRANCH}', \
                     gitCommit: '${GIT_COMMIT}'             
             }
         }
