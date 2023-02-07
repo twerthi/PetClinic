@@ -18,7 +18,7 @@ pipeline {
         stage ('Build Web') {
             steps {
                 script {
-                    bat "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}"
+                    sh "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}"
                 }
             }
         }
