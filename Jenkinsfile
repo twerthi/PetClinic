@@ -28,5 +28,23 @@ pipeline {
                 """
             }
         }
+
+        stage('Push build information') {
+            steps {
+                octopusPushBuildInformation \
+                toolId: 'Default', \
+                serverId: 'https://shawnsesna.octopusdemos.app', \
+                spaceId: 'Spaces-1', \
+                commentParser: 'GitHub', \
+                overwriteMode: 'FailIfExists', \
+                packageId: 'PetClinic.Web', \
+                packageVersion: '${VERSION_NUMBER}', \
+                verboseLogging: false, \
+                additionalArgs: '--debug', \
+                gitUrl: 'https://github.com/twerthi/PetClinic', \
+                gitBranch: '${GIT_BRANCH}' \
+                gitCommit: '${GIT_COMMIT}'
+            }
+        }
     }
 }
