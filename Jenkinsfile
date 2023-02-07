@@ -24,7 +24,7 @@ pipeline {
         stage('Push to Nexus') {
             steps {
                 bat """
-                    mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupID='OTPP' -Dversion=${VERSION_NUMBER} -Dfile=target/petclinic.web.${VERSION_NUMBER}.war -Durl=https://nexus.octopusdemos.app/repository/TestMavinRepo -DrepositoryId=nexus-maven -DpomFile=pom.xml -DartifactId='PetClinic.Web'
+                    mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupID=OTPP -Dversion=${VERSION_NUMBER} -Dfile=target/petclinic.web.${VERSION_NUMBER}.war -Durl=https://nexus.octopusdemos.app/repository/TestMavinRepo -DrepositoryId=nexus-maven -DpomFile=pom.xml -DartifactId=PetClinic.Web
                 """
             }
         }
