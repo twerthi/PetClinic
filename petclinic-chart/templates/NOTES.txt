@@ -1,0 +1,6 @@
+This helm chart consists of the following:
+- MySQL Deployment for the database back end
+- PetClinic web Deployment for the application front end
+- ClusterIP services for both Deployments
+- Flyway Job to create database schema and seed databas
+- NGINX ingress controller

@@ -1,0 +1,39 @@
+version: '3'
+services:
+    mysql:
+        container_name: mysql
+        image: mysql
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_USER: petclinic 
+            MYSQL_PASSWORD: "Greatballs0ffire!"
+            MYSQL_DATABASE: "petclinic"
+            MYSQL_ROOT_PASSWORD: "Greatballs0ffire!"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            timeout: 20s
+            retries: 10
+    petclinic:
+        container_name: petclinic_web
+        image: octopussamples/petclinic-web
+        depends_on: 
+            mysql:
+                condition: service_healthy
+        ports: 
+            - 8080:8080
+        environment:
+            URL: "jdbc:mysql://mysql:3306/petclinic?useUnicode=true"
+            USERNAME: "petclinic"
+            USERPASSWORD: "Greatballs0ffire!"
+    flyway:
+        container_name: flyway
+        image: octopussamples/petclinic-database
+        environment: 
+            FLYWAY_URL: "jdbc:mysql://mysql:3306/petclinic?useUnicode=true"
+            FLYWAY_USER: "petclinic"
+            FLYWAY_PASSWORD: "Greatballs0ffire!"
+        command: migrate
+        depends_on: 
+            mysql:
+                condition: service_healthy

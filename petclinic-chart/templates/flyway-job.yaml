@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: petclinic-flyway
+spec:
+  template:
+    spec:
+      containers:
+        - name: flyway
+          image: octopussamples/petclinic-database
+          command: ["flyway", "migrate"]
+          env:
+            - name: FLYWAY_URL
+              value: "jdbc:mysql://{{ .Values.databaseService.name }}:3306/petclinic?useUnicode=true&useSsl=false"
+            - name: FLYWAY_USER
+              valueFrom:
+                secretKeyRef:
+                  key:  petclinicusername
+                  name: {{ .Release.Name }}-petclinic-auth
+            - name: FLYWAY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key:  petclinicpassword
+                  name: {{ .Release.Name }}-petclinic-auth
+      initContainers:
+        - name: wait-for-it
+          image: index.docker.io/vencakrecl/wait-for-it
+          args:
+            - {{ .Values.databaseService.name }}:3306
+            - '--timeout=10'
+      restartPolicy: Never

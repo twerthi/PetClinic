@@ -1,0 +1,29 @@
+name: $(Year:yyyy).$(DayOfMonth).$(BuildID)
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: vs2017-win2016
+  steps:
+  - checkout: self
+  - task: Maven@3
+    displayName: Maven pom.xml
+    inputs:
+      goals: clean package dependency:purge-local-repository
+      options: -Dproject.versionNumber=$(Build.BuildNumber) -DdatabaseServerName=$(DatabaseServerName) -DdatabaseName=$(DatabaseName) -DskipTests -DdatabaseUserName=$(DatabaseUserName) -DdatabaseUserPassword=$(DatabaseUserPassword)
+  - task: OctopusPack@4
+    displayName: Package petclinic.flyway
+    inputs:
+      PackageId: petclinic.flyway
+      PackageVersion: $(Build.BuildNumber)
+      SourcePath: $(Build.SourcesDirectory)/flyway
+      OutputPath: $(build.stagingdirectory)
+  - task: OctopusPush@4
+    displayName: Push Packages to Octopus
+    inputs:
+      OctoConnectedServiceName: 3305f10d-3bcc-4601-b98d-f995559834f2
+      Space: Spaces-203
+      Package: >-
+        $(Build.SourcesDirectory)/target/*.war
+
+        $(build.artifactstagingdirectory)/*.nupkg
