@@ -16,10 +16,10 @@ pipeline {
         }
 
         stage ('Build Web') {
-            steps {
-                script {
-                    bat "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}"
-                }
+            withMaven(
+                maven: 'maven-3'
+            ) {
+                sh "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}"
             }
         }
     }
