@@ -38,12 +38,12 @@ pipeline {
                     commentParser: 'GitHub', \
                     overwriteMode: 'FailIfExists', \
                     packageId: 'PetClinic.Web', \
-                    packageVersion: '${VERSION_NUMBER}', \
+                    packageVersion: "${VERSION_NUMBER}", \
                     verboseLogging: false, \
                     additionalArgs: '--debug', \
                     gitUrl: 'https://github.com/twerthi/PetClinic', \
-                    gitBranch: '${GIT_BRANCH}', \
-                    gitCommit: '${GIT_COMMIT}'             
+                    gitBranch: "${GIT_BRANCH}", \
+                    gitCommit: "${GIT_COMMIT}"             
             }
         }
     }
