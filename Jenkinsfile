@@ -34,7 +34,7 @@ pipeline {
                 octopusPushBuildInformation \
                     toolId: 'Default', \
                     serverId: 'Octopus Deploy', \
-                    spaceId: 'Spaces-1', \
+                    spaceId: 'Spaces-350', \
                     commentParser: 'GitHub', \
                     overwriteMode: 'FailIfExists', \
                     packageId: 'PetClinic.Web', \
