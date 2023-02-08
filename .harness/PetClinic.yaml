@@ -1,0 +1,46 @@
+pipeline:
+  name: PetClinic
+  identifier: PetClinic
+  projectIdentifier: Octo_Pet_Shop
+  orgIdentifier: Fiscal_Apps
+  tags: {}
+  stages:
+    - stage:
+        name: Stage1
+        identifier: Stage1
+        description: ""
+        type: Deployment
+        spec:
+          serviceConfig:
+            serviceRef: Service1
+            serviceDefinition:
+              spec:
+                variables: []
+              type: Kubernetes
+          execution:
+            steps:
+              - step:
+                  type: K8sRollingDeploy
+                  name: Rolling Deployment
+                  identifier: RollingDeployment
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+                  timeout: 10m
+            rollbackSteps: []
+          infrastructure:
+            environmentRef: Development
+            infrastructureDefinition:
+              type: KubernetesDirect
+              spec:
+                connectorRef: Rancher
+                namespace: development
+                releaseName: release-<+INFRA_KEY>
+            allowSimultaneousDeployments: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
