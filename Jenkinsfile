@@ -37,7 +37,7 @@ pipeline {
                     spaceId: 'Spaces-350', \
                     commentParser: 'GitHub', \
                     overwriteMode: 'FailIfExists', \
-                    packageId: 'PetClinic.Web', \
+                    packageId: 'OTPP:PetClinic.Web', \
                     packageVersion: "${VERSION_NUMBER}", \
                     verboseLogging: false, \
                     additionalArgs: '--debug', \
