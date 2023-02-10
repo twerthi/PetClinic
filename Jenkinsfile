@@ -17,14 +17,14 @@ pipeline {
 
         stage('Build') { 
             steps {
-                bat "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}" 
+                bat "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}"  
             }
         }
 
         stage('Push to Nexus') {
             steps {
                 bat """
-                    mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupId=OTPP -Dversion=${VERSION_NUMBER} -Dfile=target/petclinic.web.${VERSION_NUMBER}.war -Durl=https://nexus.octopusdemos.app/repository/TestMavinRepo -DrepositoryId=nexus-maven -DpomFile=pom.xml -DartifactId=petclinicweb
+                    mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupId=OTPP -Dversion=${VERSION_NUMBER} -Dfile=target/petclinic.web.${VERSION_NUMBER}.war -Durl=https://nexus.octopusdemos.app/repository/TestMavinRepo -DrepositoryId=nexus-maven -DpomFile=pom.xml -DartifactId=PetClinic.Web
                 """
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                     spaceId: 'Spaces-350', \
                     commentParser: 'GitHub', \
                     overwriteMode: 'FailIfExists', \
-                    packageId: 'petclinicweb', \
+                    packageId: 'PetClinic.Web', \
                     packageVersion: "${VERSION_NUMBER}", \
                     verboseLogging: false, \
                     additionalArgs: '--debug', \
