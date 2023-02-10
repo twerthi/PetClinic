@@ -24,7 +24,7 @@ pipeline {
         stage('Push to Nexus') {
             steps {
                 bat """
-                    mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupId=OTPP -Dversion=${VERSION_NUMBER} -Dfile=target/petclinic.web.${VERSION_NUMBER}.war -Durl=https://nexus.octopusdemos.app/repository/TestMavinRepo -DrepositoryId=nexus-maven -DpomFile=pom.xml -DartifactId=petclinic.web
+                    mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupId=OTPP -Dversion=${VERSION_NUMBER} -Dfile=target/petclinic.web.${VERSION_NUMBER}.war -Durl=https://nexus.octopusdemos.app/repository/TestMavinRepo -DrepositoryId=nexus-maven -DpomFile=pom.xml -DartifactId=petclinicweb
                 """
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                     spaceId: 'Spaces-350', \
                     commentParser: 'GitHub', \
                     overwriteMode: 'FailIfExists', \
-                    packageId: 'petclinic.web', \
+                    packageId: 'petclinicweb', \
                     packageVersion: "${VERSION_NUMBER}", \
                     verboseLogging: false, \
                     additionalArgs: '--debug', \
