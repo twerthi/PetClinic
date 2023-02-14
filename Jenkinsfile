@@ -54,7 +54,8 @@ pipeline {
                     serverId: 'Octopus Deploy', \
                     project: 'Java MySqlDemo', \
                     packageConfigs: [[packageName: 'petclinic.mysql.flyway', packageReferenceName: 'Octopus Server (built-in)', packageVersion: '2023.1.0131']], \
-                    spaceId: 'Spaces-350'
+                    spaceId: 'Spaces-350', \
+                    releaseVersion: "${VERSION_NUMBER}"
             }
         }
     }
