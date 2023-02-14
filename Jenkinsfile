@@ -53,7 +53,7 @@ pipeline {
                     toolId: 'Default', \
                     serverId: 'Octopus Deploy', \
                     project: 'Java MySql Demo', \
-                    packageConfigs: [[packageName: 'petclinic.mysql.flyway', packageReferenceName: 'Octopus Server (built-in)', packageVersion: '2023.1.0131'], [packageName: 'OTPP:PetClinic.Web', packageReferenceName: 'Nexus Maven Feed', packageVersion: '2023.02.14.36']], \
+                    packageConfigs: [[packageName: 'petclinic.mysql.flyway', packageReferenceName: 'Octopus Server (built-in)', packageVersion: '2023.1.0131'], [packageName: 'OTPP:PetClinic.Web', packageReferenceName: 'Deploy PetClinic to Tomcat', packageVersion: '2023.02.14.36']], \
                     spaceId: 'Spaces-350', \
                     releaseVersion: "${VERSION_NUMBER}"
             }
