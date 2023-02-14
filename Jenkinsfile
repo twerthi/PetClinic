@@ -46,5 +46,16 @@ pipeline {
                     gitCommit: "${GIT_COMMIT}"             
             }
         }
+
+        stage('Create release') {
+            steps {
+                octopusCreateRelease \
+                    toolId: 'Default', \
+                    serverId: 'Octopus Deploy', \
+                    project: 'Java MySqlDemo', \
+                    packageConfigs: [[packageName: 'petclinic.mysql.flyway', packageReferenceName: 'Octopus Server (built-in)', packageVersion: '2023.1.0131']], \
+                    spaceId: 'Spaces-350'
+            }
+        }
     }
 } 
