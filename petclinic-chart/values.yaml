@@ -51,7 +51,7 @@ securityContext: {}
 
 webService:
   type: ClusterIP
-  port: 8081
+  port: 8080
 
 databaseService:
   type: ClusterIP
