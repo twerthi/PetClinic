@@ -17,14 +17,14 @@ pipeline {
 
         stage('Build') { 
             steps {
-                bat "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}"  
+                bat "mvn clean package -DskipTests=true -Dproject.versionNumber=${VERSION_NUMBER}-snapshot"  
             }
         }
 
         stage('Push to Nexus') {
             steps {
                 bat """
-                    mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupId=OTPP -Dversion=${VERSION_NUMBER} -Dfile=target/petclinic.web.${VERSION_NUMBER}.war -Durl=https://nexus.octopusdemos.app/repository/TestMavinRepo -DrepositoryId=nexus-maven -DpomFile=pom.xml -DartifactId=PetClinic.Web
+                    mvn deploy:deploy-file -s ci_settings_nexus.xml -DgroupId=OTPP -Dversion=${VERSION_NUMBER}-snapshot -Dfile=target/petclinic.web.${VERSION_NUMBER}.war -Durl=https://nexus.octopusdemos.app/repository/TestMavinRepo -DrepositoryId=nexus-maven -DpomFile=pom.xml -DartifactId=PetClinic.Web
                 """
             }
         }
@@ -38,7 +38,7 @@ pipeline {
                     commentParser: 'GitHub', \
                     overwriteMode: 'FailIfExists', \
                     packageId: 'OTPP:PetClinic.Web', \
-                    packageVersion: "${VERSION_NUMBER}", \
+                    packageVersion: "${VERSION_NUMBER}-snapshot", \
                     verboseLogging: false, \
                     additionalArgs: '--debug', \
                     gitUrl: 'https://github.com/twerthi/PetClinic', \
@@ -55,7 +55,8 @@ pipeline {
                     project: 'Java MySql Demo', \
                     //packageConfigs: [[packageName: 'petclinic.web', packageReferenceName: '', packageVersion: '2023.02.14.36'], [packageName: 'PetClinic.Web', packageReferenceName: '', packageVersion: '2023.02.14.36']], \
                     spaceId: 'Spaces-350', \
-                    releaseVersion: "${VERSION_NUMBER}"
+                    releaseVersion: "${VERSION_NUMBER}", \
+                    channelId: 'Development'
             }
         }
     }
