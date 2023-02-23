@@ -11,3 +11,6 @@ bin/
 # Maven
 target/
 /DbUp/PetClinic-Dbup/.vs/PetClinic-Dbup/v15/Server/sqlite3/db.lock
+
+# Build file
+Jenkinsfile

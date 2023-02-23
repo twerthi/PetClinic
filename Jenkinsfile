@@ -56,7 +56,7 @@ pipeline {
                     //packageConfigs: [[packageName: 'petclinic.web', packageReferenceName: '', packageVersion: '2023.02.14.36'], [packageName: 'PetClinic.Web', packageReferenceName: '', packageVersion: '2023.02.14.36']], \
                     spaceId: 'Spaces-350', \
                     releaseVersion: "${VERSION_NUMBER}", \
-                    channelId: 'Development'
+                    channel: 'Development'
             }
         }
     }
